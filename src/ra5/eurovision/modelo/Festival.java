@@ -25,14 +25,13 @@ import java.util.TreeMap;
 public class Festival {
 
     private static final String SALIDA = "resultados.txt";
-  //  private      festival;
+    private  TreeMap<String,Integer>    festival;
 
     /**
      * Constructor de la clase FestivalEurovision
      */
-    public Festival() {
-       //TODO
-
+    public Festival () {
+        festival = new TreeMap<>();
     }
 
     /**
@@ -42,10 +41,11 @@ public class Festival {
      * si existe el país se añaden los puntos
      */
     public void addPuntos(String pais, int puntos) {
-        //TODO
-
-
-
+        if(!festival.containsKey(pais)){
+            festival.put(pais,puntos);
+        }
+        int sumaPuntos = festival.get(pais);
+        festival.put(pais,sumaPuntos + puntos);
     }
 
     /**
@@ -60,7 +60,14 @@ public class Festival {
      * Usar try-with-resources
      */
     public int leerPuntuaciones(String nombre) {
-        //TODO
+        File f = new File(nombre);
+        try (BufferedReader entrada = new BufferedReader(new FileReader(f))){
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
 
         return 0;
