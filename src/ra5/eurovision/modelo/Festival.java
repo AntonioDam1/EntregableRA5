@@ -61,18 +61,25 @@ public class Festival {
      */
     public int leerPuntuaciones(String nombre) {
         File f = new File(nombre);
+        int errores = 0;
         try (BufferedReader entrada = new BufferedReader(new FileReader(f))){
-
+            String linea = entrada.readLine();
+            while(linea != null){
+                try {
+                    tratarLinea(linea);
+                } catch (IllegalArgumentException e) {
+                    errores++;
+                }
+            }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
-        return 0;
+        return errores;
 
     }
+
 
     /**
      * A partir de una línea extrae los puntos dados a cada uno de los países indicados
@@ -84,8 +91,10 @@ public class Festival {
      * Se propagan las posibles excepciones
      */
     private void tratarLinea(String linea) throws NumberFormatException, IllegalArgumentException {
-        //TODO
-
+        String[] trozos = linea.split(":");
+        for (int i = 0; i < trozos.length - 1; i+=2) {
+            addPuntos(trozos[i],Integer.parseInt(trozos[i+1]));
+        }
     }
 
     /**
@@ -96,11 +105,14 @@ public class Festival {
      * Se propagan las posibles excepciones
      */
     public int puntuacionDe(String pais) throws PaisExcepcion {
-        //TODO
-
-
-        return 0;
-
+        int puntos = 0;
+        if(festival.containsKey(pais)){
+             puntos = festival.get(pais);
+        }
+        else{
+            throw new PaisExcepcion("El país " + pais + " no existe");
+        }
+        return puntos;
     }
 
     /**
