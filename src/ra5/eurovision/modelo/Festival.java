@@ -22,7 +22,7 @@ import java.util.TreeMap;
  * Importa el orden de las claves
  */
 //@Antonio Aguilera
-public class Festival {
+public class    Festival {
 
     private static final String SALIDA = "resultados.txt";
     private  TreeMap<String,Integer>    festival;
@@ -120,10 +120,16 @@ public class Festival {
      * (el primero encontrado)
      */
     public String ganador() {
-        //TODO
-
-
-        return null;
+        int maximo=0;
+        String pais="";
+        for (String pai : festival.keySet()) {
+            int puntos = festival.get(pai);
+            if (puntos>maximo){
+                maximo=puntos;
+                pais=pai;
+            }
+        }
+        return pais;
     }
 
     /**
@@ -133,13 +139,11 @@ public class Festival {
      * Usar try-with-resources
      */
     public void guardarResultados() throws IOException {
-        //TODO
-
-
-
+        File f =new File(SALIDA);
+        try (PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(f)))){
+            for (String p : festival.keySet()) {
+                salida.println(p + ": " + festival.get(p) + "\n");
+            }
+        }
     }
-
-
-
-
 }
