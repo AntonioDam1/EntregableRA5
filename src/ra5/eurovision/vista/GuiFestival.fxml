@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="417.0" prefWidth="556.0" stylesheets="@../../../../resources/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="417.0" prefWidth="556.0" stylesheets="@../../../../resources/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ra5.eurovision.controlador.FestivalController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <top>
@@ -42,8 +42,8 @@
                         <Insets top="3.0" />
                      </padding>
                   </TextField>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Mostrar puntos de país" GridPane.columnIndex="2" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="190.0" text="Mostrar ganador" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Mostrar puntos de país" GridPane.columnIndex="2" onAction="#mostrarPuntosPais"/>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="190.0" text="Mostrar ganador" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#mostrarGanador">
                      <padding>
                         <Insets bottom="1.0" />
                      </padding></Button>
@@ -55,7 +55,7 @@
             <Insets left="5.0" />
          </padding>
          <bottom>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="62.0" text="clear" BorderPane.alignment="BOTTOM_RIGHT">
+            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="62.0" text="clear" BorderPane.alignment="BOTTOM_RIGHT" onAction="#clear">
                <BorderPane.margin>
                   <Insets right="20.0" />
                </BorderPane.margin></Button>
@@ -76,7 +76,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Fichero">
             <items>
-              <MenuItem mnemonicParsing="false" text="Leer Votaciones Ctrl+L" />
+              <MenuItem mnemonicParsing="false" text="Leer Votaciones Ctrl+L" onAction="#leerVotaciones"/>
                   <MenuItem mnemonicParsing="false" text="Salir Ctlr+S" />
             </items>
           </Menu>

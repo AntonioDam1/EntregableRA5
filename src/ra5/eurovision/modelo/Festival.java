@@ -41,6 +41,7 @@ public class    Festival {
      * si existe el país se añaden los puntos
      */
     public void addPuntos(String pais, int puntos) {
+        pais = pais.toUpperCase();
         if(!festival.containsKey(pais)){
             festival.put(pais,puntos);
         }
@@ -70,6 +71,7 @@ public class    Festival {
                 } catch (IllegalArgumentException e) {
                     errores++;
                 }
+                linea = entrada.readLine();
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -106,6 +108,7 @@ public class    Festival {
      */
     public int puntuacionDe(String pais) throws PaisExcepcion {
         int puntos = 0;
+        pais = pais.toUpperCase();
         if(festival.containsKey(pais)){
              puntos = festival.get(pais);
         }
@@ -122,11 +125,11 @@ public class    Festival {
     public String ganador() {
         int maximo=0;
         String pais="";
-        for (String pai : festival.keySet()) {
-            int puntos = festival.get(pai);
+        for (String p : festival.keySet()) {
+            int puntos = festival.get(p);
             if (puntos>maximo){
                 maximo=puntos;
-                pais=pai;
+                pais=p;
             }
         }
         return pais;
@@ -142,7 +145,7 @@ public class    Festival {
         File f =new File(SALIDA);
         try (PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(f)))){
             for (String p : festival.keySet()) {
-                salida.println(p + ": " + festival.get(p) + "\n");
+                salida.println(p + festival.get(p));
             }
         }
     }
