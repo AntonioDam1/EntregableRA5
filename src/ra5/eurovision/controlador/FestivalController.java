@@ -12,9 +12,11 @@ import ra5.eurovision.modelo.Festival;
 import ra5.eurovision.modelo.PaisExcepcion;
 
 import java.io.File;
+import java.io.IOException;
 
 //Antonio
 public class FestivalController {
+    private boolean importado;
     @FXML
     private CheckBox checkBox;
 
@@ -28,6 +30,7 @@ public class FestivalController {
 
     public FestivalController() {
         fest = new Festival();
+        importado = false;
     }
     @FXML
     void leerVotaciones(ActionEvent event){
@@ -41,20 +44,40 @@ public class FestivalController {
         if (f != null) {
             int errores = fest.leerPuntuaciones(f.getAbsolutePath());
             txtArea.setText("Los errores son" + errores);
+            importado = true;
         }
     }
 
     @FXML
     void mostrarPuntosPais(ActionEvent event){
-        try {
-            txtArea.setText(fest.puntuacionDe(txtField.getText())+"");
-        } catch (PaisExcepcion e) {
-            txtArea.setText(e.getMessage());
+        if(importado){
+            try {
+                txtArea.setText(fest.puntuacionDe(txtField.getText())+"");
+            } catch (PaisExcepcion e) {
+                txtArea.setText(e.getMessage());
+            }
         }
+        else{
+            txtArea.setText("Hay que hacer la importacion previamente");
+        }
+
     }
     @FXML
     void mostrarGanador(ActionEvent event){
-        
+        if(importado){
+            txtArea.setText("El ganador es " + fest.ganador());
+            if(checkBox.isSelected()){
+                try {
+                    fest.guardarResultados();
+                    txtArea.appendText("\nGuardado resultados en fichero");
+                } catch (IOException e) {
+                    txtArea.setText("Error al escribir en fichero");
+                }
+            }
+        }
+        else{
+            txtArea.setText("Hay que hacer la importacion previamente");
+        }
     }
     @FXML
     void salir(ActionEvent event) {

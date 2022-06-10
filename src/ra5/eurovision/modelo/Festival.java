@@ -145,7 +145,7 @@ public class    Festival {
         File f =new File(SALIDA);
         try (PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(f)))){
             for (String p : festival.keySet()) {
-                salida.println(p + festival.get(p));
+                salida.println(p + ": " + festival.get(p));
             }
         }
     }

@@ -77,7 +77,7 @@
           <Menu mnemonicParsing="false" text="Fichero">
             <items>
               <MenuItem mnemonicParsing="false" text="Leer Votaciones Ctrl+L" onAction="#leerVotaciones"/>
-                  <MenuItem mnemonicParsing="false" text="Salir Ctlr+S" />
+                  <MenuItem mnemonicParsing="false" text="Salir Ctlr+S" onAction="#salir"/>
             </items>
           </Menu>
         </menus>
